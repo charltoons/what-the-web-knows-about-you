@@ -1,0 +1,17 @@
+/* CSS files add styling rules to your content */
+
+@font-face {
+  font-family: "Founders";
+  src: url("https://cdn.glitch.com/b5ccb8e6-3736-42ae-a640-6978ea26c387%2FFoundersGrotesk-Regular.woff2?1528478735861") format("woff2");
+}
+
+body {
+  font-family: "Founders", "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif;
+  background: #373fff;
+  color: #fff;
+  margin: 2em;
+}
+
+h1 {
+  color: #fff;
+}
