@@ -1,6 +1,3 @@
-import partOfDay from 'humanized-part-of-day'
-import { isNullOrUndefined } from 'util';
-
 export default function Salutation(props){
   if (props.clientTime){
     const hour = props.clientTime.hour
