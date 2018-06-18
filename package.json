@@ -7,14 +7,20 @@
     "start": "next start"
   },
   "dependencies": {
+    "indefinite": "^2.1.1",
+    "isomorphic-unfetch": "^2.0.0",
+    "mobile-detect": "^1.4.2",
     "next": "6.0.3",
-    "platform": "^1.3.5",
+    "os-name": "latest",
+    "platform": "latest",
     "react": "16.4.0",
     "react-dom": "16.4.0",
     "react-redux": "^5.0.1",
     "redux": "^3.6.0",
     "redux-devtools-extension": "^2.13.2",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "semver": "^5.5.0",
+    "useragent": "^2.3.0"
   },
   "license": "ISC",
   "devDependencies": {

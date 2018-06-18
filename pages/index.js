@@ -1,15 +1,34 @@
+import 'isomorphic-unfetch'
 import React from 'react'
 import {connect} from 'react-redux'
 import {startClock, serverRenderClock} from '../store'
-import Device from '../components/device'
+import Device from '../components/Device'
+import Location from '../components/Location'
 import platform from 'platform'
+import MobileDetect from 'mobile-detect'
+
 
 class Index extends React.Component {
-  static getInitialProps ({ reduxStore, req }) {
-    const clientPlatform = platform.parse((req.headers['user-agent']))
-    console.log(clientPlatform.os)
+  static async getInitialProps ({ reduxStore, req }) {
+    const userAgent = req.headers['user-agent']
+    const parsedPlatform = platform.parse(userAgent)
+    const md = new MobileDetect(userAgent)
+    let ipAddress = req.connection.remoteAddress
+    if (req.url.indexOf('debug') !== -1){
+      ipAddress = '167.160.203.69'
+    }
+    const locationResponse = await fetch(`http://ip-api.com/json/${ ipAddress }`)
+    const location = await locationResponse.json()
     const isServer = !!req
-    return {}
+    return {
+      ipAddress,
+      location,
+      platform: parsedPlatform,
+      mobileDetect: {
+        tablet: md.tablet(),
+        phone: md.phone(),
+      }
+    }
   }
 
   componentDidMount () {
@@ -22,9 +41,9 @@ class Index extends React.Component {
   render () {
     return (
       <>
-        <h1>Hello</h1>
-        <p>Here's what we know.</p>
-        <Device />
+        <h1>Hello, here's what we know:</h1>
+        <Device {...this.props} />
+        <Location {...this.props} />
       </>
 
     )
