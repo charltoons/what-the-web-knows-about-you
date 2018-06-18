@@ -13,7 +13,7 @@ class Index extends React.Component {
     const userAgent = req.headers['user-agent']
     const parsedPlatform = platform.parse(userAgent)
     const md = new MobileDetect(userAgent)
-    let ipAddress = req.connection.remoteAddress
+    let ipAddress = req.headers['x-forwarded-for']
     if (req.url.indexOf('debug') !== -1){
       ipAddress = '167.160.203.69'
     }
