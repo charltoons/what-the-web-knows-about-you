@@ -5,7 +5,7 @@ export default function Screen(props){
   if (props.mobileDetect.phone){
     let phoneName = props.mobileDetect.phone
     phoneName = a(props.mobileDetect.phone)
-    if (phoneName.toLowerCase().indexOf('phone') !== -1){
+    if (phoneName.toLowerCase().indexOf('phone') === -1){
       phoneName += ' phone'
     }
     return <em>{ phoneName }</em>
