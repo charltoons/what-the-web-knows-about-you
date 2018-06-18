@@ -4,11 +4,18 @@ import {connect} from 'react-redux'
 import {startClock, serverRenderClock} from '../store'
 import Device from '../components/Device'
 import Location from '../components/Location'
+import Salutation from '../components/Salutation'
 import platform from 'platform'
 import MobileDetect from 'mobile-detect'
-
+import { DateTime } from 'luxon'
 
 class Index extends React.Component {
+  constructor(){
+    super()
+    this.state = {
+      clientTime: null
+    }
+  }
   static async getInitialProps ({ reduxStore, req }) {
     const userAgent = req.headers['user-agent']
     const parsedPlatform = platform.parse(userAgent)
@@ -32,18 +39,25 @@ class Index extends React.Component {
   }
 
   componentDidMount () {
-    const {dispatch} = this.props
+    if (this.state.clientTime === null){
+      this.setState({
+        clientTime: DateTime.local()
+      })
+    }
   }
 
   componentWillUnmount () {
   }
 
   render () {
+    if (this.state.clientTime === null){
+      return null
+    }
     return (
       <>
-        <h1>Hello, here's what we know:</h1>
-        <Device {...this.props} />
-        <Location {...this.props} />
+        <p>Good <Salutation {...this.props} {...this.state} />, here's what we know:</p>
+        <Device {...this.props} {...this.state }/>
+        <Location {...this.props} {...this.state }/>
       </>
 
     )

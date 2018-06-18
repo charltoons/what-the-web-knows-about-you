@@ -5,8 +5,9 @@ export function City(props){
 }
 
 export function Region(props){
+  console.log(props)
   return (
-    <em>{props.location.region}</em>
+    <em>{props.location.regionName}</em>
   )
 }
 
@@ -16,5 +17,11 @@ export function Country(props){
   if (country === 'United States') article = 'the '
   return (
     <>{ article }<em>{ country }</em></>
+  )
+}
+
+export function ISP(props){
+  return (
+    <em>{ props.location.isp }</em>
   )
 }
