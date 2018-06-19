@@ -5,7 +5,6 @@ export function City(props){
 }
 
 export function Region(props){
-  console.log(props)
   return (
     <em>{props.location.regionName}</em>
   )
