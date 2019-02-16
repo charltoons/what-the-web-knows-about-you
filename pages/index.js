@@ -31,9 +31,10 @@ class Index extends React.Component {
     }
     const locationResponse = await fetch(`http://ip-api.com/json/${ipAddress}`);
     const location = await locationResponse.json();
-    const { URL } = eval("require('url')");
-    console.log(URL);
-    const referrer = new URL(req.headers["referer"]);
+    // const { URL } = eval("require('url')");
+    // console.log(URL);
+    // const referrer = new URL(req.headers["referer"]);
+    const referrer = "https://google.com";
 
     const isServer = !!req;
     return {
@@ -49,6 +50,42 @@ class Index extends React.Component {
   }
 
   componentDidMount() {
+    const id = "facebook-jssdk",
+      fjs = document.getElementsByTagName("script")[0];
+    if (document.getElementById(id)) {
+      return;
+    }
+    const js = document.createElement("script");
+    js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId: "962458123927094",
+        autoLogAppEvents: true,
+        xfbml: true,
+        version: "v3.2"
+      });
+
+      FB.getLoginStatus(function(response) {
+        console.log(response);
+        if (response.status === "connected") {
+          // the user is logged in and has authenticated your
+          // app, and response.authResponse supplies
+          // the user's ID, a valid access token, a signed
+          // request, and the time the access token
+          // and signed request each expire
+          var uid = response.authResponse.userID;
+          var accessToken = response.authResponse.accessToken;
+        } else if (response.status === "not_authorized") {
+          // the user is logged in to Facebook,
+          // but has not authenticated your app
+        } else {
+          // the user isn't logged in to Facebook.
+        }
+      });
+    };
+
     if (this.state.clientTime === null) {
       this.setState({
         clientTime: DateTime.local()
