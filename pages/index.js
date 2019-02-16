@@ -1,40 +1,41 @@
-import 'isomorphic-unfetch'
-import React from 'react'
-import {connect} from 'react-redux'
-import {startClock, serverRenderClock} from '../store'
-import Device from '../components/Device'
-import Location from '../components/Location'
-import Salutation from '../components/Salutation'
-import Browsing from '../components/Browsing'
-import platform from 'platform'
-import MobileDetect from 'mobile-detect'
-import { DateTime } from 'luxon'
+import "isomorphic-unfetch";
+import React from "react";
+import { connect } from "react-redux";
+import { startClock, serverRenderClock } from "../store";
+import Device from "../components/Device";
+import Location from "../components/Location";
+import Salutation from "../components/Salutation";
+import Browsing from "../components/Browsing";
+import platform from "platform";
+import MobileDetect from "mobile-detect";
+import { DateTime } from "luxon";
 
 class Index extends React.Component {
-  constructor(){
-    super()
+  constructor() {
+    super();
     this.state = {
       clientTime: null
-    }
+    };
   }
-  static async getInitialProps ({ reduxStore, req }) {
-    const userAgent = req.headers['user-agent']
-    const parsedPlatform = platform.parse(userAgent)
-    const md = new MobileDetect(userAgent)
-    let ipAddress = req.headers['x-forwarded-for']
-    if (!ipAddress){
-      ipAddress = req.connection.remoteAddress
+  static async getInitialProps({ reduxStore, req }) {
+    const userAgent = req.headers["user-agent"];
+    const parsedPlatform = platform.parse(userAgent);
+    const md = new MobileDetect(userAgent);
+    let ipAddress = req.headers["x-forwarded-for"];
+    if (!ipAddress) {
+      ipAddress = req.connection.remoteAddress;
     }
-    if (req.url.indexOf('debug') !== -1){
+    if (req.url.indexOf("debug") !== -1) {
       // ipAddress = '167.160.203.69'
-      ipAddress = '74.73.146.44'
+      ipAddress = "74.73.146.44";
     }
-    const locationResponse = await fetch(`http://ip-api.com/json/${ ipAddress }`)
-    const location = await locationResponse.json()
-    const { URL } = eval("require('url')")
-    const referrer = new URL(req.headers['referer'])
+    const locationResponse = await fetch(`http://ip-api.com/json/${ipAddress}`);
+    const location = await locationResponse.json();
+    const { URL } = eval("require('url')");
+    console.log(URL);
+    const referrer = new URL(req.headers["referer"]);
 
-    const isServer = !!req
+    const isServer = !!req;
     return {
       ipAddress,
       location,
@@ -42,32 +43,34 @@ class Index extends React.Component {
       platform: parsedPlatform,
       mobileDetect: {
         tablet: md.tablet(),
-        phone: md.phone(),
+        phone: md.phone()
       }
-    }
+    };
   }
 
-  componentDidMount () {
-    if (this.state.clientTime === null){
+  componentDidMount() {
+    if (this.state.clientTime === null) {
       this.setState({
         clientTime: DateTime.local()
-      })
+      });
     }
   }
 
-  componentWillUnmount () {
-  }
+  componentWillUnmount() {}
 
-  render () {
-    if (this.state.clientTime === null){
-      return null
+  render() {
+    if (this.state.clientTime === null) {
+      return null;
     }
     return (
       <>
-        <p>Good <Salutation {...this.props} {...this.state} />, here's what we know:</p>
-        <Device {...this.props} {...this.state }/>
-        <Location {...this.props} {...this.state }/>
-        <Browsing {...this.props} {...this.state }/>
+        <p>
+          Good <Salutation {...this.props} {...this.state} />, here's what we
+          know:
+        </p>
+        <Device {...this.props} {...this.state} />
+        <Location {...this.props} {...this.state} />
+        <Browsing {...this.props} {...this.state} />
         <a href="http://localhost:3000/?debug">Click</a>
         {/* referrer */}
         {/* language */}
@@ -105,11 +108,9 @@ class Index extends React.Component {
         {/* Email: clear contact or whatever */}
         {/* Email: domains you own */}
         {/* fb, tw */}
-
       </>
-
-    )
+    );
   }
 }
 
-export default connect()(Index)
+export default connect()(Index);
