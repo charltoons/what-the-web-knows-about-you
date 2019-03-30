@@ -1,0 +1,5 @@
+{
+  "version": 2,
+  "name": "what-we-know-about-you",
+  "builds": [{ "src": "package.json", "use": "@now/next" }]
+}

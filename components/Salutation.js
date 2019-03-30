@@ -1,15 +1,22 @@
-export default function Salutation(props){
-  if (props.clientTime){
-    const hour = props.clientTime.hour
-    if (hour < 12){
-      return <em>morning</em>
+function Salutation(props) {
+  let salutationWord;
+
+  if (props.clientTime) {
+    const hour = props.clientTime.hour;
+    if (hour < 12) {
+      salutationWord = "morning";
+    } else if (hour < 18) {
+      salutationWord = "afternoon";
+    } else {
+      salutationWord = "evening";
     }
-    else if (hour < 18){
-      return <em>afternoon</em>
-    }
-    else {
-      return <em>evening</em>
-    }
+    return (
+      <p>
+        Good <em>{salutationWord}</em>, here's what we know:
+      </p>
+    );
   }
-  return null
+  return null;
 }
+
+export default Salutation;

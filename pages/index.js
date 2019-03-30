@@ -1,114 +1,30 @@
-import "isomorphic-unfetch";
+import Link from "next/link";
 import React from "react";
-import { connect } from "react-redux";
-import { startClock, serverRenderClock } from "../store";
-import Device from "../components/Device";
-import Location from "../components/Location";
-import Salutation from "../components/Salutation";
-import Browsing from "../components/Browsing";
-import platform from "platform";
-import MobileDetect from "mobile-detect";
-import { DateTime } from "luxon";
+import Salutation from "../components/salutation";
+import Location from "../components/location";
+import Weather from "../components/weather";
+import Head from "../components/head";
+import state from "../state";
 
 class Index extends React.Component {
   constructor() {
     super();
-    this.state = {
-      clientTime: null
-    };
+    this.state = {};
   }
-  static async getInitialProps({ reduxStore, req }) {
-    const userAgent = req.headers["user-agent"];
-    const parsedPlatform = platform.parse(userAgent);
-    const md = new MobileDetect(userAgent);
-    let ipAddress = req.headers["x-forwarded-for"];
-    if (!ipAddress) {
-      ipAddress = req.connection.remoteAddress;
-    }
-    if (req.url.indexOf("debug") !== -1) {
-      // ipAddress = '167.160.203.69'
-      ipAddress = "74.73.146.44";
-    }
-    const locationResponse = await fetch(`http://ip-api.com/json/${ipAddress}`);
-    const location = await locationResponse.json();
-    // const { URL } = eval("require('url')");
-    // console.log(URL);
-    // const referrer = new URL(req.headers["referer"]);
-    const referrer = "https://google.com";
-
-    const isServer = !!req;
-    return {
-      ipAddress,
-      location,
-      referrer,
-      platform: parsedPlatform,
-      mobileDetect: {
-        tablet: md.tablet(),
-        phone: md.phone()
-      }
-    };
-  }
-
   componentDidMount() {
-    const id = "facebook-jssdk",
-      fjs = document.getElementsByTagName("script")[0];
-    if (document.getElementById(id)) {
-      return;
-    }
-    const js = document.createElement("script");
-    js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId: "962458123927094",
-        autoLogAppEvents: true,
-        xfbml: true,
-        version: "v3.2"
-      });
-
-      FB.getLoginStatus(function(response) {
-        console.log(response);
-        if (response.status === "connected") {
-          // the user is logged in and has authenticated your
-          // app, and response.authResponse supplies
-          // the user's ID, a valid access token, a signed
-          // request, and the time the access token
-          // and signed request each expire
-          var uid = response.authResponse.userID;
-          var accessToken = response.authResponse.accessToken;
-        } else if (response.status === "not_authorized") {
-          // the user is logged in to Facebook,
-          // but has not authenticated your app
-        } else {
-          // the user isn't logged in to Facebook.
-        }
-      });
-    };
-
-    if (this.state.clientTime === null) {
-      this.setState({
-        clientTime: DateTime.local()
-      });
-    }
+    const inittedState = state();
+    inittedState.on("change", newState => {
+      this.setState(newState);
+    });
+    this.setState(inittedState);
   }
-
-  componentWillUnmount() {}
-
   render() {
-    if (this.state.clientTime === null) {
-      return null;
-    }
     return (
-      <>
-        <p>
-          Good <Salutation {...this.props} {...this.state} />, here's what we
-          know:
-        </p>
-        <Device {...this.props} {...this.state} />
-        <Location {...this.props} {...this.state} />
-        <Browsing {...this.props} {...this.state} />
-        <a href="http://localhost:3000/?debug">Click</a>
+      <main>
+        <Head />
+        <Salutation {...this.state} />
+        <Location {...this.state} />
+        <Weather {...this.state} />
         {/* referrer */}
         {/* language */}
         {/* navigator.hardware concurrency */}
@@ -145,9 +61,9 @@ class Index extends React.Component {
         {/* Email: clear contact or whatever */}
         {/* Email: domains you own */}
         {/* fb, tw */}
-      </>
+      </main>
     );
   }
 }
 
-export default connect()(Index);
+export default Index;
