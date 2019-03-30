@@ -1,14 +1,10 @@
-import qs from "qs";
-import getConfig from "next/config";
-const { publicRuntimeConfig } = getConfig();
-
+const qs = require("query-string");
 const makeRequest = async state => {
   const params = qs.stringify({
     lat: state.ip.lat,
-    lon: state.ip.lon,
-    appid: publicRuntimeConfig.env.OPEN_WEATHER_MAP_API_KEY
+    lon: state.ip.lon
   });
-  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?${params}`;
+  const apiUrl = `/weather?${params}`;
 
   const response = await fetch(apiUrl);
   const weather = await response.json();

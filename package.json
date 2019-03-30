@@ -6,10 +6,14 @@
   },
   "dependencies": {
     "indefinite": "^2.2.1",
+    "isomorphic-unfetch": "^3.0.0",
     "knot.js": "^1.1.5",
     "luxon": "^1.12.0",
+    "micro": "^9.3.3",
+    "micro-query": "^0.3.0",
     "next": "^8.0.0",
-    "qs": "^6.7.0",
+    "now-micro": "^0.3.0",
+    "query-string": "^6.4.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "tiny-emitter": "^2.1.0"

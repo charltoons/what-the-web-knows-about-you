@@ -1,5 +1,16 @@
 {
   "version": 2,
   "name": "what-we-know-about-you",
-  "builds": [{ "src": "package.json", "use": "@now/next" }]
+  "env": {
+    "OPEN_WEATHER_MAP_API_KEY": "@open-weather-map-api-key"
+  },
+  "builds": [
+    { "src": "package.json", "use": "@now/next" },
+    { "src": "/lambdas/ip.js", "use": "@now/node" },
+    { "src": "/lambdas/weather.js", "use": "@now/node" }
+  ],
+  "routes": [
+    { "src": "/ip", "dest": "/lambdas/ip.js" },
+    { "src": "/weather", "dest": "/lambdas/weather.js" }
+  ]
 }

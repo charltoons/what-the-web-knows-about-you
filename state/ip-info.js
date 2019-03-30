@@ -1,6 +1,5 @@
 const makeRequest = async state => {
-  const apiUrl =
-    window.location.protocol === "http:" ? "http://ip-api.com/json" : "/ip";
+  const apiUrl = `/ip`;
 
   const response = await fetch(apiUrl);
 

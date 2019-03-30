@@ -55,7 +55,6 @@ const head = () => {
     <Head>
       <title>What We Know About You</title>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <link rel="stylesheet" href="/static/css/site.css" />
       <style>{style}</style>
     </Head>
   );
