@@ -5,6 +5,7 @@ import Location from "../components/location";
 import Weather from "../components/weather";
 import Referrer from "../components/referrer";
 import Visits from "../components/visits";
+import Social from "../components/social";
 import Head from "../components/head";
 import state from "../state";
 
@@ -29,6 +30,7 @@ class Index extends React.Component {
         <Weather {...this.state} />
         <Referrer {...this.state} />
         <Visits {...this.state} />
+        <Social {...this.state} />
         {/* referrer */}
         {/* language */}
         {/* navigator.hardware concurrency */}
