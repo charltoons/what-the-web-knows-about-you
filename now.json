@@ -2,7 +2,8 @@
   "version": 2,
   "name": "what-we-know-about-you",
   "env": {
-    "OPEN_WEATHER_MAP_API_KEY": "@open-weather-map-api-key"
+    "OPEN_WEATHER_MAP_API_KEY": "@open-weather-map-api-key",
+    "FB_APP_ID": "@wwkay-fb-app-id"
   },
   "builds": [
     { "src": "package.json", "use": "@now/next" },
