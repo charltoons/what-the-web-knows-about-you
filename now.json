@@ -6,11 +6,13 @@
   },
   "builds": [
     { "src": "package.json", "use": "@now/next" },
-    { "src": "/lambdas/ip.js", "use": "@now/node" },
-    { "src": "/lambdas/weather.js", "use": "@now/node" }
+    { "src": "lambdas/ip.js", "use": "@now/node" },
+    { "src": "lambdas/weather.js", "use": "@now/node" },
+    { "src": "lambdas/refer.js", "use": "@now/node" }
   ],
   "routes": [
     { "src": "/ip", "dest": "/lambdas/ip.js" },
-    { "src": "/weather", "dest": "/lambdas/weather.js" }
+    { "src": "/weather(.*)", "dest": "/lambdas/weather.js$1" },
+    { "src": "/refer(.*)", "dest": "/lambdas/refer.js$1" }
   ]
 }

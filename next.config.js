@@ -1,3 +1,9 @@
+require("dotenv").config();
 module.exports = {
-  target: "serverless"
+  target: "serverless",
+  env: {
+    apiHost: process.env.API_HOSTNAME,
+    nodeEnv: process.env.NODE_ENV,
+    referOverride: process.env.REFER_OVERRIDE
+  }
 };

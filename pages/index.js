@@ -3,6 +3,7 @@ import React from "react";
 import Salutation from "../components/salutation";
 import Location from "../components/location";
 import Weather from "../components/weather";
+import Referrer from "../components/referrer";
 import Head from "../components/head";
 import state from "../state";
 
@@ -25,6 +26,7 @@ class Index extends React.Component {
         <Salutation {...this.state} />
         <Location {...this.state} />
         <Weather {...this.state} />
+        <Referrer {...this.state} />
         {/* referrer */}
         {/* language */}
         {/* navigator.hardware concurrency */}

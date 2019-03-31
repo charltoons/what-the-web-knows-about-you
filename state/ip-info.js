@@ -1,18 +1,9 @@
+import api from "../lib/api";
+
 const makeRequest = async state => {
-  const apiUrl = `/ip`;
-
-  const response = await fetch(apiUrl);
-
-  if (response.status === 200) {
-    const ipInfo = await response.json();
-    state.ip = ipInfo;
-    state.emit("change", state);
-    return;
-  }
-
-  console.warn("Error with IP info.");
-  state.ip = null;
-  // state.emit("change", state);
+  const response = await api("/ip");
+  state.ip = response;
+  state.emit("change", state);
 };
 
 const ipInfo = state => {

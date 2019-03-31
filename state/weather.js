@@ -1,18 +1,15 @@
-const qs = require("query-string");
+import api from "../lib/api";
+
 const makeRequest = async state => {
-  const params = qs.stringify({
+  state.weather = await api("/weather", {
     lat: state.ip.lat,
     lon: state.ip.lon
   });
-  const apiUrl = `/weather?${params}`;
-
-  const response = await fetch(apiUrl);
-  const weather = await response.json();
-  state.weather = weather;
   state.emit("change", state);
 };
 
 const weather = state => {
+  // weather requires a lat/lng which comes from IP
   if (state.weather !== undefined) return state.weather;
   if (state.ip === undefined || state.ip === null) return state.weather;
   state.weather = null;

@@ -2,9 +2,11 @@
   "scripts": {
     "build": "next build",
     "dev": "next",
-    "now-build": "next build"
+    "now-build": "next build",
+    "lambdas": "now-we-test serve --port=5000"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
     "indefinite": "^2.2.1",
     "isomorphic-unfetch": "^3.0.0",
     "knot.js": "^1.1.5",
@@ -19,6 +21,7 @@
     "tiny-emitter": "^2.1.0"
   },
   "devDependencies": {
-    "dotenv": "^7.0.0"
+    "dotenv": "^7.0.0",
+    "now-we-test": "^0.9.0"
   }
 }

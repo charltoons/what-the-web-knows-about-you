@@ -20,7 +20,7 @@ function Location({ ip }) {
     // prettier-ignore
     return (
       <p>
-        From your <em>Internet Protocol address</em>, we can tell that you're in {renderedCountry}. 
+        From your <em>IP address</em>, we can tell that you're in {renderedCountry}. 
         Specifically <em>{ip.city}</em> in{" "}
         <em>{ip.regionName}</em>.
       </p>
