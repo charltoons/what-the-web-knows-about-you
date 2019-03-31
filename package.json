@@ -15,6 +15,7 @@
     "micro-query": "^0.3.0",
     "next": "^8.0.0",
     "now-micro": "^0.3.0",
+    "number-to-words": "^1.2.4",
     "query-string": "^6.4.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",

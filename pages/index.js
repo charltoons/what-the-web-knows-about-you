@@ -4,6 +4,7 @@ import Salutation from "../components/salutation";
 import Location from "../components/location";
 import Weather from "../components/weather";
 import Referrer from "../components/referrer";
+import Visits from "../components/visits";
 import Head from "../components/head";
 import state from "../state";
 
@@ -27,6 +28,7 @@ class Index extends React.Component {
         <Location {...this.state} />
         <Weather {...this.state} />
         <Referrer {...this.state} />
+        <Visits {...this.state} />
         {/* referrer */}
         {/* language */}
         {/* navigator.hardware concurrency */}
@@ -58,6 +60,8 @@ class Index extends React.Component {
         {/* autofill */}
         {/* popular chrome extensions, lastpass, onepassword, ad blocker, ghostery, etc */}
         {/* whether or not you're using an incognito window */}
+        {/* do not track header */}
+        {/* whether there's an ad blocker or not*/}
 
         {/* Email: gravatar */}
         {/* Email: clear contact or whatever */}
